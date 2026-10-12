@@ -1,6 +1,6 @@
 package hu.bme.mit.spaceship;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
 * Class storing and managing the torpedoes of a ship
@@ -30,13 +30,13 @@ public class TorpedoStore {
 
   public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
-      throw new IllegalArgumentException("numberOfTorpedos");
+      throw new IllegalArgumentException("Number of torpedoes must be positive and cannot exceed available torpedoes.");
     }
 
     boolean success = false;
 
     // simulate random overheating of the launcher bay which prevents firing
-   double r = java.util.concurrent.ThreadLocalRandom.current().nextDouble();
+   double r = ThreadLocalRandom.current().nextDouble();
 
     if (r >= FAILURE_RATE) {
       // successful firing
